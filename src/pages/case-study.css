@@ -1,0 +1,67 @@
+.case .wrap { max-width: 1000px; margin: 0 auto; }
+.case .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.case .eyebrow b { color: var(--lime); font-weight: 500; }
+.case section { margin-top: clamp(56px, 8vw, 120px); }
+
+.case .head { margin-top: clamp(48px, 7vw, 96px); }
+.case h1 { font-family: var(--display); font-weight: 600; font-size: clamp(2.2rem, 5.6vw, 4rem); line-height: 1.02; letter-spacing: -0.02em; margin: 18px 0 26px; max-width: 16ch; }
+.case .metarow { display: flex; flex-wrap: wrap; gap: 26px 40px; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.case .metarow .m .k { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.case .metarow .m .v { font-family: var(--display); font-weight: 500; font-size: 1rem; }
+
+.case .fig { position: relative; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); display: flex; flex-direction: column; justify-content: flex-end; padding: 22px; min-height: clamp(220px, 42vw, 520px); }
+.case .fig.wide { min-height: clamp(200px, 34vw, 440px); }
+.case .fig .tag { position: absolute; top: 16px; left: 16px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.72; }
+.case .fig .cap { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+.case .f-char { background: #15160e; color: #edefe4; }
+.case .f-bone { background: #eceadf; color: #26251c; }
+.case .f-green { background: #1c2417; color: #dce7c8; }
+.case .figc { margin-top: 12px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: var(--muted); }
+
+.case .h2 { font-family: var(--display); font-weight: 600; font-size: clamp(1.7rem, 3.4vw, 2.5rem); line-height: 1.06; letter-spacing: -0.02em; margin: 14px 0 20px; max-width: 22ch; }
+.case .lead { font-family: var(--display); font-weight: 400; font-size: clamp(1.15rem, 1.8vw, 1.5rem); line-height: 1.5; max-width: 60ch; color: var(--ink); }
+.case p.body { font-family: var(--display); font-weight: 400; font-size: clamp(1.02rem, 1.35vw, 1.18rem); line-height: 1.62; max-width: 64ch; color: var(--ink); margin-top: 18px; }
+.case p.body + p.body { margin-top: 16px; }
+.case .muted { color: var(--muted); }
+
+.case .split { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
+.case .facts { border: 1px solid var(--line); border-radius: 16px; padding: 24px; }
+.case .facts .row { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
+.case .facts .row:last-child { border-bottom: 0; }
+.case .facts .row .k { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.case .facts .row .v { font-family: var(--display); font-weight: 500; text-align: right; }
+
+.case .solved { margin-top: 30px; border-top: 1px solid var(--line); }
+.case .solved .s { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: clamp(16px, 3vw, 44px); padding: 22px 0; border-bottom: 1px solid var(--line); }
+.case .solved .q { font-family: var(--display); font-weight: 600; font-size: clamp(1.1rem, 1.7vw, 1.4rem); letter-spacing: -0.01em; }
+.case .solved .a { font-family: var(--display); font-weight: 400; font-size: clamp(1rem, 1.3vw, 1.12rem); line-height: 1.5; color: var(--muted); }
+
+.case .cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+.case .card { border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+.case .card .n { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lime); }
+.case .card h3 { font-family: var(--display); font-weight: 600; font-size: 1.15rem; margin: 10px 0 8px; }
+.case .card p { font-family: var(--display); font-weight: 400; font-size: 0.98rem; line-height: 1.5; color: var(--muted); }
+
+.case .decision { margin-top: clamp(40px, 5vw, 72px); }
+.case .decision .h3 { font-family: var(--display); font-weight: 600; font-size: clamp(1.3rem, 2.2vw, 1.7rem); letter-spacing: -0.01em; margin-bottom: 12px; }
+.case .decision .dnum { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lime); margin-bottom: 10px; }
+
+.case .callout { border-radius: 20px; padding: clamp(28px, 4vw, 52px); background: rgba(182, 230, 63, 0.09); border: 1px solid var(--line); }
+.case .callout .eyebrow { margin-bottom: 16px; }
+.case .callout .big { font-family: var(--display); font-weight: 600; font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.2; letter-spacing: -0.01em; max-width: 24ch; }
+.case .callout p.body { max-width: 62ch; }
+
+.case .quote { font-family: var(--display); font-weight: 500; font-size: clamp(1.6rem, 3.4vw, 2.6rem); line-height: 1.24; letter-spacing: -0.02em; max-width: 20ch; }
+.case .quote .lime { color: var(--lime); }
+.case .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 34px; }
+.case .metric { border: 1px dashed var(--line); border-radius: 16px; padding: 24px; }
+.case .metric .val { font-family: var(--display); font-weight: 600; font-size: clamp(2rem, 4vw, 3rem); color: var(--lime); line-height: 1; }
+.case .metric .lab { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 10px; }
+.case .slotnote { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-top: 14px; }
+
+@media (max-width: 820px) {
+  .case .split { grid-template-columns: 1fr; }
+  .case .cards3 { grid-template-columns: 1fr; }
+  .case .metrics { grid-template-columns: 1fr; }
+  .case .solved .s { grid-template-columns: 1fr; gap: 8px; }
+}

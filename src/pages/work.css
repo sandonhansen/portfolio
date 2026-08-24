@@ -1,0 +1,282 @@
+.work.panel { min-height: auto; }
+
+.work-index {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: clamp(28px, 4vh, 48px);
+}
+
+/* Horizontal showreel */
+.work .showreel {
+  margin-bottom: clamp(48px, 8vw, 88px);
+  opacity: 0;
+  animation: fade 0.8s ease 0.15s forwards;
+}
+.work .showreel-stage {
+  position: relative;
+  width: 100%;
+  height: min(62vh, 660px);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #000;
+}
+.work .showreel-stage .slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.55s ease;
+  pointer-events: none;
+}
+.work .showreel-stage .slide.is-active { opacity: 1; }
+
+.work .showreel-meta {
+  margin-top: 16px;
+  max-width: 36ch;
+}
+.work .showreel-meta .k {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.work .showreel-meta .h {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--lime);
+  margin-top: 6px;
+}
+
+/* Section header */
+.work .work-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: clamp(28px, 4vw, 40px);
+  margin-bottom: clamp(22px, 3vw, 32px);
+  border-top: 1px solid var(--line);
+}
+.work .work-head-title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin: 0;
+}
+.work .work-head-count {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  flex: none;
+}
+
+/* Project cards */
+.work .project-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 3vw, 28px);
+}
+
+.work .project-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0.62fr 1.38fr;
+  align-items: stretch;
+  height: min(62vh, 660px);
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--muted) 18%, transparent);
+  overflow: hidden;
+  padding: clamp(28px, 4vw, 44px) 0 clamp(28px, 4vw, 44px) clamp(28px, 4vw, 44px);
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.75s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.work .project-card.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.work .project-copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-width: 0;
+  max-width: 34ch;
+  padding-right: clamp(16px, 2vw, 28px);
+}
+
+.work .project-copy .metric {
+  margin-bottom: clamp(18px, 2.5vh, 28px);
+}
+.work .project-copy .metric .val {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 5.5vw, 4.25rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--lime);
+}
+.work .project-copy .metric .lab {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 10px;
+}
+
+.work .project-copy .eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.work .project-copy .title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 14px;
+}
+.work .project-copy .hook {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+  line-height: 1.4;
+  color: var(--muted);
+  margin: 0 0 28px;
+}
+
+.work .project-copy .cta {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: var(--panel);
+  text-decoration: none;
+  padding: 15px 26px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.work .project-copy .cta .arr {
+  display: inline-block;
+  transition: transform 0.2s ease;
+  flex: none;
+}
+.work .project-card:hover .cta .arr {
+  transform: translate(2px, -2px);
+}
+
+.work .project-media {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+}
+
+.work .project-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150%;
+  height: 100%;
+  border-radius: 18px 0 0 18px;
+  border: 1px solid var(--line);
+  border-right: none;
+  /* Cast left/down into the card surface — right/outer shadow is clipped by overflow.
+     Use black, not --ink (ink is light in dark mode and would read as a white glow). */
+  box-shadow:
+    -20px 16px 40px rgb(0 0 0 / 0.28),
+    -6px 4px 14px rgb(0 0 0 / 0.16);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 22px;
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+  pointer-events: none;
+}
+.work .project-card:hover .project-screen {
+  transform: translateY(-6px);
+}
+
+.work .project-screen .tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+.work .project-screen .cap {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.work .project-screen.f-char { background: #15160e; color: #edefe4; }
+.work .project-screen.f-bone { background: #eceadf; color: #26251c; }
+.work .project-screen.f-green { background: #1c2417; color: #dce7c8; }
+
+@media (max-width: 980px) {
+  .work .showreel-stage {
+    height: auto;
+    aspect-ratio: 16 / 10;
+    max-height: min(62vh, 660px);
+  }
+
+  .work .project-card {
+    grid-template-columns: 1fr;
+    height: auto;
+    padding: clamp(24px, 5vw, 32px);
+    gap: 24px;
+  }
+
+  .work .project-copy {
+    max-width: none;
+    padding-right: 0;
+  }
+
+  .work .project-media {
+    position: static;
+  }
+
+  .work .project-screen {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    transform: none;
+  }
+
+  .work .project-card:hover .project-screen {
+    transform: none;
+  }
+}
