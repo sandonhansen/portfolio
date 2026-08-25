@@ -1,4 +1,10 @@
-.about .wrap { max-width: 1000px; margin: 0 auto; }
+.about .wrap {
+  max-width: 1000px;
+  width: 100%;
+  min-width: 0;
+  margin: 0 auto;
+  overflow-x: clip;
+}
 .about.panel { min-height: auto; }
 .about .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
 .about .eyebrow b { color: var(--lime); font-weight: 500; }
@@ -20,11 +26,17 @@
 
 .about .marquee-block {
   margin-top: clamp(40px, 6vw, 72px);
+  min-width: 0;
+  overflow: hidden;
 }
 .about .marquee-block .eyebrow {
   margin-bottom: 22px;
 }
 
+.logo-marquee {
+  max-width: 100%;
+  min-width: 0;
+}
 .logo-marquee-track {
   gap: 28px;
   animation: logo-marquee 32s linear infinite;
