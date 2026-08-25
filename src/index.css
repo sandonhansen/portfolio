@@ -61,7 +61,7 @@ body {
 .brandtag b { color: var(--ink); font-weight: 500; }
 .cluster { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
 
-.tbtn { width: 38px; height: 38px; flex: none; display: inline-flex; align-items: center; justify-content: center; background: var(--nav-bg); border: 1px solid var(--line); border-radius: 50%; color: var(--muted); cursor: pointer; transition: color 0.2s, background 0.2s; }
+.tbtn { width: 44px; height: 44px; flex: none; display: inline-flex; align-items: center; justify-content: center; background: var(--nav-bg); border: 1px solid var(--line); border-radius: 50%; color: var(--muted); cursor: pointer; transition: color 0.2s, background 0.2s; }
 .tbtn:hover { color: var(--ink); }
 .tbtn svg { width: 17px; height: 17px; }
 nav {
