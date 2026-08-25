@@ -13,6 +13,7 @@
   --nav-active: #fff;
   --display: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --frame-inset: clamp(10px, 1.6vw, 22px);
 }
 
 [data-theme="dark"] {
@@ -27,19 +28,26 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { height: 100%; }
+html { height: 100%; }
 
 body {
+  min-height: 100%;
+  min-height: 100dvh;
+  padding: var(--frame-inset);
   background: var(--ground);
   color: var(--ink);
   font-family: var(--display);
   -webkit-font-smoothing: antialiased;
   transition: background 0.35s ease, color 0.35s ease;
+  overflow-x: clip;
 }
 .panel {
   position: relative;
-  min-height: calc(100vh - clamp(20px, 3.2vw, 44px));
-  margin: clamp(10px, 1.6vw, 22px);
+  min-height: calc(100dvh - (2 * var(--frame-inset)));
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
   background: var(--panel);
   border-radius: 26px;
   padding: clamp(20px, 3vw, 44px) clamp(20px, 3.4vw, 52px) clamp(22px, 3vw, 44px);
