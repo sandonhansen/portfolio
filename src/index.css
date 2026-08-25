@@ -56,10 +56,25 @@ body {
   overflow: visible;
   transition: background 0.35s ease;
 }
-.top { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
 .brandtag { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); line-height: 1.5; }
 .brandtag b { color: var(--ink); font-weight: 500; }
-.cluster { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+.cluster {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+  justify-content: flex-end;
+}
 
 .tbtn { width: 44px; height: 44px; flex: none; display: inline-flex; align-items: center; justify-content: center; background: var(--nav-bg); border: 1px solid var(--line); border-radius: 50%; color: var(--muted); cursor: pointer; transition: color 0.2s, background 0.2s; }
 .tbtn:hover { color: var(--ink); }
@@ -408,5 +423,14 @@ nav > a.active,
   .hero-right { order: -1; }
   .reel { flex: none; min-height: clamp(200px, 42vw, 320px); aspect-ratio: 4 / 3; }
   .name { font-size: clamp(3.2rem, 18vw, 6rem); }
-  .top { flex-wrap: wrap; }
+  .brandtag { flex: 1 0 100%; }
+  .cluster {
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between;
+  }
+  nav > a,
+  .connect-trigger {
+    padding: 0 12px;
+  }
 }
