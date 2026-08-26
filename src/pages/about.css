@@ -27,7 +27,7 @@
 .about .marquee-block {
   margin-top: clamp(40px, 6vw, 72px);
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 .about .marquee-block .eyebrow {
   margin-bottom: 22px;
@@ -36,7 +36,7 @@
 .logo-marquee {
   max-width: 100%;
   min-width: 0;
-  padding: 18px 0;
+  padding: clamp(40px, 6vw, 64px) 0;
   overflow: hidden;
   cursor: grab;
 }
@@ -46,6 +46,10 @@
 .logo-marquee-track {
   gap: 28px;
   will-change: transform;
+  overflow: visible;
+}
+.logo-marquee-tile {
+  overflow: visible;
 }
 .logo-marquee-card {
   transform: scale(1);
