@@ -1,4 +1,4 @@
-import { siAsana, siClaude, siCursor, siElevenlabs, siWebflow } from 'simple-icons'
+import { siAsana, siClaude, siCursor, siElevenlabs, siPosthog, siWebflow } from 'simple-icons'
 import figmaIcon from 'devicon/icons/figma/figma-original.svg?url'
 import reactIcon from 'devicon/icons/react/react-original.svg?url'
 import tailwindIcon from 'devicon/icons/tailwindcss/tailwindcss-original.svg?url'
@@ -7,6 +7,7 @@ import css3Icon from 'devicon/icons/css3/css3-original.svg?url'
 import lovableLogo from '../assets/logo-lovable.svg'
 import screenStudioLogo from '../assets/logo-screenstudio.png'
 import adobeLogo from '../assets/logo-adobe.svg'
+import amplitudeLogo from '../assets/logo-amplitude.svg'
 
 function DeviconImg({ src }) {
   return <img src={src} alt="" className="h-[30px] w-[30px] object-contain" draggable={false} />
@@ -41,6 +42,8 @@ const LOGOS = [
   { key: 'webflow', label: 'Webflow', render: () => <SimpleBrandIcon icon={siWebflow} /> },
   { key: 'elevenlabs', label: 'ElevenLabs', render: () => <SimpleBrandIcon icon={siElevenlabs} monochrome /> },
   { key: 'asana', label: 'Asana', render: () => <SimpleBrandIcon icon={siAsana} /> },
+  { key: 'amplitude', label: 'Amplitude', render: () => <RasterLogo src={amplitudeLogo} /> },
+  { key: 'posthog', label: 'PostHog', render: () => <SimpleBrandIcon icon={siPosthog} monochrome /> },
   { key: 'lovable', label: 'Lovable', render: () => <RasterLogo src={lovableLogo} /> },
   { key: 'screenstudio', label: 'Screen Studio', render: () => <RasterLogo src={screenStudioLogo} /> },
   { key: 'adobe', label: 'Adobe', render: () => <RasterLogo src={adobeLogo} /> },
