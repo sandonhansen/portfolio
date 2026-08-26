@@ -17,6 +17,7 @@ const AMPLITUDE_PATHS = [
 
 const MAX_SCALE_BOOST = 0.28
 const FOCUS_RADIUS_RATIO = 0.42
+const AUTO_SCROLL_DURATION_MS = 32000
 
 function smoothstep(value) {
   return value * value * (3 - 2 * value)
@@ -146,11 +147,16 @@ function LogoMarquee() {
   const trackRef = useRef(null)
   const cardRefs = useRef([])
   const boundsRef = useRef({ min: 0, max: 0 })
+  const loopWidthRef = useRef(0)
   const offsetRef = useRef(0)
   const dragRef = useRef(null)
   const velocityRef = useRef(0)
   const frameRef = useRef(null)
   const focusFrameRef = useRef(null)
+  const hoverPausedRef = useRef(false)
+  const interactingRef = useRef(false)
+  const autoScrollFrameRef = useRef(null)
+  const wheelResumeTimerRef = useRef(null)
   const [isDragging, setIsDragging] = useState(false)
 
   const sequence = useMemo(
@@ -169,8 +175,24 @@ function LogoMarquee() {
     const trackWidth = track.scrollWidth
     const min = Math.min(0, viewportWidth - trackWidth)
     boundsRef.current = { min, max: 0 }
+    loopWidthRef.current = trackWidth / 3
     offsetRef.current = clamp(offsetRef.current, min, 0)
     track.style.transform = `translate3d(${offsetRef.current}px, 0, 0)`
+  }, [])
+
+  const normalizeLoopOffset = useCallback(() => {
+    const loopWidth = loopWidthRef.current
+    if (loopWidth <= 0) return
+
+    let next = offsetRef.current
+    while (next <= -loopWidth) next += loopWidth
+    while (next > 0) next -= loopWidth
+    offsetRef.current = next
+
+    const track = trackRef.current
+    if (track) {
+      track.style.transform = `translate3d(${next}px, 0, 0)`
+    }
   }, [])
 
   const updateFocusStyles = useCallback(() => {
@@ -247,12 +269,16 @@ function LogoMarquee() {
 
   const startMomentum = useCallback(() => {
     stopMomentum()
+    interactingRef.current = true
 
     const step = () => {
       velocityRef.current *= 0.92
       if (Math.abs(velocityRef.current) < 0.25) {
         velocityRef.current = 0
         frameRef.current = null
+        interactingRef.current = false
+        normalizeLoopOffset()
+        scheduleFocusUpdate()
         return
       }
 
@@ -262,13 +288,17 @@ function LogoMarquee() {
 
     if (Math.abs(velocityRef.current) >= 0.25) {
       frameRef.current = requestAnimationFrame(step)
+    } else {
+      interactingRef.current = false
+      normalizeLoopOffset()
     }
-  }, [applyOffset, stopMomentum])
+  }, [applyOffset, normalizeLoopOffset, scheduleFocusUpdate, stopMomentum])
 
   const onPointerDown = useCallback((event) => {
     if (event.pointerType === 'mouse' && event.button !== 0) return
 
     stopMomentum()
+    interactingRef.current = true
     dragRef.current = {
       pointerId: event.pointerId,
       startX: event.clientX,
@@ -304,16 +334,71 @@ function LogoMarquee() {
 
     if (!reducedMotion) {
       startMomentum()
+    } else {
+      interactingRef.current = false
+      normalizeLoopOffset()
+      scheduleFocusUpdate()
     }
-  }, [reducedMotion, startMomentum])
+  }, [normalizeLoopOffset, reducedMotion, scheduleFocusUpdate, startMomentum])
 
   const onWheel = useCallback((event) => {
     if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return
 
     event.preventDefault()
     stopMomentum()
+    interactingRef.current = true
     applyOffset(offsetRef.current - event.deltaX)
-  }, [applyOffset, stopMomentum])
+
+    if (wheelResumeTimerRef.current !== null) {
+      window.clearTimeout(wheelResumeTimerRef.current)
+    }
+    wheelResumeTimerRef.current = window.setTimeout(() => {
+      wheelResumeTimerRef.current = null
+      interactingRef.current = false
+      normalizeLoopOffset()
+      scheduleFocusUpdate()
+    }, 180)
+  }, [applyOffset, normalizeLoopOffset, scheduleFocusUpdate, stopMomentum])
+
+  useEffect(() => {
+    if (reducedMotion) return undefined
+
+    let lastTime = performance.now()
+
+    const tick = (now) => {
+      const loopWidth = loopWidthRef.current
+      const shouldAutoScroll = loopWidth > 0
+        && !hoverPausedRef.current
+        && !interactingRef.current
+        && !dragRef.current
+
+      if (shouldAutoScroll) {
+        const dt = Math.min(now - lastTime, 48)
+        const speed = loopWidth / AUTO_SCROLL_DURATION_MS
+        let next = offsetRef.current - speed * dt
+
+        while (next <= -loopWidth) next += loopWidth
+
+        offsetRef.current = next
+        const track = trackRef.current
+        if (track) {
+          track.style.transform = `translate3d(${next}px, 0, 0)`
+        }
+        updateFocusStyles()
+      }
+
+      lastTime = now
+      autoScrollFrameRef.current = requestAnimationFrame(tick)
+    }
+
+    autoScrollFrameRef.current = requestAnimationFrame(tick)
+
+    return () => {
+      if (autoScrollFrameRef.current !== null) {
+        cancelAnimationFrame(autoScrollFrameRef.current)
+      }
+    }
+  }, [reducedMotion, updateFocusStyles])
 
   useEffect(() => {
     updateBounds()
@@ -336,6 +421,9 @@ function LogoMarquee() {
     return () => {
       resizeObserver?.disconnect()
       stopMomentum()
+      if (wheelResumeTimerRef.current !== null) {
+        window.clearTimeout(wheelResumeTimerRef.current)
+      }
       if (focusFrameRef.current !== null) {
         cancelAnimationFrame(focusFrameRef.current)
       }
@@ -351,6 +439,8 @@ function LogoMarquee() {
         WebkitMaskImage: 'linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%)',
       }}
       aria-label="Tools and platforms"
+      onMouseEnter={() => { hoverPausedRef.current = true }}
+      onMouseLeave={() => { hoverPausedRef.current = false }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}
