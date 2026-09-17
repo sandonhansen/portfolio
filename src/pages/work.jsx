@@ -68,8 +68,6 @@ function work() {
   }, [])
 
   const slide = REEL_SLIDES[active]
-  const count = CASE_STUDIES.length
-  const countLabel = `${count} case ${count === 1 ? 'study' : 'studies'}`
 
   return (
     <div className="work-index">
@@ -96,7 +94,6 @@ function work() {
             Below is a small cross‑section of relevant work that I can share. I&apos;m happy to walk through my process and discuss these examples, get in touch to learn more.
           </p>
         </div>
-        <span className="work-head-count">{countLabel}</span>
       </header>
 
       <div className="project-list">
