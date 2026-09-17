@@ -54,13 +54,12 @@
 
 /* Section header */
 .work .work-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 24px;
   padding-top: clamp(28px, 4vw, 40px);
   margin-bottom: clamp(22px, 3vw, 32px);
   border-top: 1px solid var(--line);
+}
+.work .work-head-copy {
+  max-width: 52ch;
 }
 .work .work-head-title {
   font-family: var(--display);
@@ -71,13 +70,13 @@
   color: var(--ink);
   margin: 0;
 }
-.work .work-head-count {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+.work .work-head-desc {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.02rem, 1.35vw, 1.18rem);
+  line-height: 1.62;
   color: var(--muted);
-  flex: none;
+  margin: 16px 0 0;
 }
 
 /* Project cards */
