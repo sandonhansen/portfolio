@@ -90,7 +90,12 @@ function work() {
       </section>
 
       <header className="work-head">
-        <h2 className="work-head-title">Work</h2>
+        <div className="work-head-copy">
+          <h2 className="work-head-title">Selected work</h2>
+          <p className="work-head-desc">
+            Below is a small cross‑section of relevant work that I can share. I&apos;m happy to walk through my process and discuss these examples, get in touch to learn more.
+          </p>
+        </div>
         <span className="work-head-count">{countLabel}</span>
       </header>
 
