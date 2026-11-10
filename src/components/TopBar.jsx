@@ -1,6 +1,7 @@
-import { NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { ArrowUpRight, Check, CopySimple } from '@phosphor-icons/react'
+import { SandonIconRound } from './SandonIconRound'
 
 const LINKS = [
   { to: '/', end: true, label: 'Home' },
@@ -124,14 +125,15 @@ function TopBar() {
     try {
       return localStorage.getItem('theme')
         || document.documentElement.dataset.theme
-        || 'dark'
+        || 'light'
     } catch {
-      return 'dark'
+      return 'light'
     }
   })
   const navRef = useRef(null)
   const location = useLocation()
   const [connectOpen, setConnectOpen] = useState(false)
+  const [brandHot, setBrandHot] = useState(false)
   const [pill, setPill] = useState({ left: 0, width: 0, ready: false })
 
   useEffect(() => {
@@ -178,7 +180,20 @@ function TopBar() {
 
   return (
     <div className="top">
-      <div className="brandtag"><b>Sandon Hansen</b><br />Product x Design</div>
+      <Link
+        className="brandtag"
+        to="/"
+        aria-label="Home"
+        onPointerEnter={() => setBrandHot(true)}
+        onPointerLeave={() => setBrandHot(false)}
+        onFocus={() => setBrandHot(true)}
+        onBlur={() => setBrandHot(false)}
+      >
+        <SandonIconRound size={52} active={brandHot} />
+        <span>
+          <b>Sandon Hansen</b><br />Product x Design
+        </span>
+      </Link>
       <div className="cluster">
         <nav ref={navRef} aria-label="Primary">
           <span

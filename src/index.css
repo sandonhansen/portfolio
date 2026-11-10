@@ -64,8 +64,35 @@ body {
   gap: 16px;
   flex-wrap: wrap;
 }
-.brandtag { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); line-height: 1.5; }
-.brandtag b { color: var(--ink); font-weight: 500; }
+.brandtag {
+  font-family: var(--mono);
+  font-size: 16px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.5;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.brandtag .sandon-icon {
+  flex: none;
+  color: var(--ink);
+}
+.brandtag > span {
+  font-size: 14px;
+}
+.brandtag b {
+  font-size: 16px;
+  color: var(--ink);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.brandtag:hover b,
+.brandtag:focus-visible b {
+  color: var(--lime);
+}
 .cluster {
   display: flex;
   align-items: center;
@@ -381,7 +408,20 @@ nav > a.active,
   font-size: clamp(1.8rem, 4vw, 3rem);
   line-height: 1.05;
   letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.endcta .big .sandon-icon {
+  flex: none;
+  color: var(--ink);
+}
+.endcta .big span {
   max-width: 16ch;
+  transition: color 0.2s ease;
+}
+.site-footer:hover .endcta .big span {
+  color: var(--lime);
 }
 .endcta .cta {
   padding: 16px 30px;

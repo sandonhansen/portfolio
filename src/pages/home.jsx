@@ -45,7 +45,7 @@ function home() {
             <div className="h">{slide.h}</div>
           </div>
           <Link className="cta" to="/work">
-            Selected work
+            View work
             <ArrowUpRight className="arr" size={16} weight="bold" aria-hidden="true" />
           </Link>
         </div>
