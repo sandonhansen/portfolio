@@ -305,67 +305,6 @@ nav > a.active,
 .pitch .l1 { font-family: var(--display); font-weight: 500; font-size: clamp(1.05rem, 1.7vw, 1.5rem); line-height: 1.25; letter-spacing: -0.01em; color: var(--ink); }
 .pitch .l2 { font-family: var(--display); font-weight: 400; font-size: clamp(0.95rem, 1.3vw, 1.15rem); line-height: 1.35; color: var(--muted); margin-top: 6px; }
 
-.hero-right {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  min-height: 0;
-  opacity: 0;
-  animation: fade 0.9s ease 0.45s forwards;
-}
-.reel {
-  position: relative;
-  flex: 1;
-  width: 100%;
-  min-height: clamp(220px, 36vh, 520px);
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  background: #000;
-}
-.slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.55s ease;
-  pointer-events: none;
-}
-.slide.is-active { opacity: 1; }
-.s1 { background: #15160e; }
-.s2 { background: var(--lime); }
-.s3 { background: #1c2417; }
-.s4 { background: #eceadf; }
-
-.reel-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  column-gap: 20px;
-  row-gap: 16px;
-  margin-top: 14px;
-}
-.reel-title {
-  flex: 1 1 12rem;
-  min-width: 0;
-}
-.reel-title .k {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.reel-title .h {
-  font-family: var(--display);
-  font-weight: 600;
-  font-size: clamp(1.15rem, 1.8vw, 1.55rem);
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  color: var(--lime);
-  margin-top: 4px;
-}
-
 .cta {
   font-family: var(--mono);
   font-size: 13px;
@@ -460,8 +399,6 @@ nav > a.active,
     gap: 28px;
     padding-top: 18px;
   }
-  .hero-right { order: -1; }
-  .reel { flex: none; min-height: clamp(200px, 42vw, 320px); aspect-ratio: 4 / 3; }
   .name { font-size: clamp(3.2rem, 18vw, 6rem); }
   .brandtag { flex: 1 0 100%; }
   .cluster {

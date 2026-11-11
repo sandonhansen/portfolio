@@ -14,6 +14,8 @@ type SandonIconRoundProps = {
    * hovered. Hovering the icon itself always plays it.
    */
   active?: boolean;
+  /** Increment to force the hover animation to replay while still active. */
+  playToken?: number;
 };
 
 export function SandonIconRound({
@@ -22,6 +24,7 @@ export function SandonIconRound({
   accent = "currentColor",
   accentOpacity = 0.25,
   active = false,
+  playToken = 0,
 }: SandonIconRoundProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const [hovered, setHovered] = useState(false);
@@ -38,8 +41,15 @@ export function SandonIconRound({
   useEffect(() => {
     if (!isActive) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const el = svgRef.current;
+    if (el) {
+      // Restart CSS animations when playToken bumps or active turns on.
+      el.removeAttribute("data-active");
+      void el.getBoundingClientRect();
+      el.setAttribute("data-active", "true");
+    }
     play("hover");
-  }, [isActive]);
+  }, [isActive, playToken]);
 
   // Idle double blink: every 2.5–6s at random.
   // Pauses while hovered, when the tab is hidden, or with reduced motion.

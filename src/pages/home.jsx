@@ -1,20 +1,6 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { ArrowUpRight } from '@phosphor-icons/react'
-import { REEL_SLIDES } from '../data/work'
+import ProjectReel from '../components/ProjectReel'
 
 function home() {
-  const [active, setActive] = useState(0)
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setActive((i) => (i + 1) % REEL_SLIDES.length)
-    }, 3000)
-    return () => clearInterval(id)
-  }, [])
-
-  const slide = REEL_SLIDES[active]
-
   return (
     <div className="stage">
       <div className="hero-left">
@@ -29,27 +15,13 @@ function home() {
         </div>
       </div>
 
-      <div className="hero-right">
-        <div className="reel" aria-live="polite" aria-atomic="true">
-          {REEL_SLIDES.map((s, i) => (
-            <div
-              key={`${s.k}-${s.h}`}
-              className={`slide ${s.tone}${i === active ? ' is-active' : ''}`}
-              aria-hidden={i !== active}
-            />
-          ))}
-        </div>
-        <div className="reel-meta">
-          <div className="reel-title">
-            <div className="k">{slide.k}</div>
-            <div className="h">{slide.h}</div>
-          </div>
-          <Link className="cta" to="/work">
-            View work
-            <ArrowUpRight className="arr" size={16} weight="bold" aria-hidden="true" />
-          </Link>
-        </div>
-      </div>
+      <ProjectReel
+        variant="hero"
+        hitTo="/work"
+        showCta
+        ctaTo="/work"
+        ctaLabel="View work"
+      />
     </div>
   )
 }
