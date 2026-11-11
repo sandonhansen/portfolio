@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, ArrowsIn, ArrowsOut } from '@phosphor-icons/react'
+import { ArrowUpRight } from '@phosphor-icons/react'
+import { Maximize, Minimize } from 'lucide-react'
 import { REEL_SLIDES } from '../data/work'
 
 function home() {
@@ -74,9 +75,9 @@ function home() {
             onClick={() => setExpanded((v) => !v)}
           >
             {expanded ? (
-              <ArrowsIn size={18} weight="bold" aria-hidden="true" />
+              <Minimize size={18} strokeWidth={2.25} aria-hidden="true" />
             ) : (
-              <ArrowsOut size={18} weight="bold" aria-hidden="true" />
+              <Maximize size={18} strokeWidth={2.25} aria-hidden="true" />
             )}
           </button>
         </div>
