@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { CASE_STUDIES, REEL_SLIDES } from '../data/work'
+import { CASE_STUDIES } from '../data/work'
+import ProjectReel from '../components/ProjectReel'
 import SiteFooter from '../components/SiteFooter'
 import './work.css'
 
@@ -36,34 +37,9 @@ function ProjectCard({ study }) {
 }
 
 function work() {
-  const [active, setActive] = useState(0)
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setActive((i) => (i + 1) % REEL_SLIDES.length)
-    }, 3000)
-    return () => clearInterval(id)
-  }, [])
-
-  const slide = REEL_SLIDES[active]
-
   return (
     <div className="work-index">
-      <section className="showreel" aria-label="Selected work reel">
-        <div className="showreel-stage" aria-live="polite" aria-atomic="true">
-          {REEL_SLIDES.map((s, i) => (
-            <div
-              key={`${s.k}-${s.h}`}
-              className={`slide ${s.tone}${i === active ? ' is-active' : ''}`}
-              aria-hidden={i !== active}
-            />
-          ))}
-        </div>
-        <div className="showreel-meta">
-          <div className="k">{slide.k}</div>
-          <div className="h">{slide.h}</div>
-        </div>
-      </section>
+      <ProjectReel variant="page" />
 
       <header className="work-head">
         <div className="work-head-copy">
