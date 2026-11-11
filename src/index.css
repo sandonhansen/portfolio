@@ -343,6 +343,13 @@ nav > a.active,
 .s3 { background: #1c2417; }
 .s4 { background: #eceadf; }
 
+.reel-hit {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  cursor: pointer;
+}
 .reel-expand {
   display: none;
   position: absolute;

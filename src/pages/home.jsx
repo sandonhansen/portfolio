@@ -211,12 +211,17 @@ function home() {
                 aria-hidden={i !== active}
               />
             ))}
+            <Link className="reel-hit" to="/work" aria-label="View work"></Link>
             <button
               type="button"
               className="reel-expand"
               aria-label={expanded ? 'Collapse project panel' : 'Expand project panel'}
               aria-expanded={expanded}
-              onClick={() => toggleExpand()}
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                void toggleExpand()
+              }}
             >
               {expanded ? (
                 <Minimize size={18} strokeWidth={2.25} aria-hidden="true" />
