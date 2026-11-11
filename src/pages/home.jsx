@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowUpRight } from '@phosphor-icons/react'
+import { ArrowUpRight, ArrowsIn, ArrowsOut } from '@phosphor-icons/react'
 import { REEL_SLIDES } from '../data/work'
 
 function home() {
   const [active, setActive] = useState(0)
+  const [expanded, setExpanded] = useState(false)
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -12,6 +13,33 @@ function home() {
     }, 3000)
     return () => clearInterval(id)
   }, [])
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 760px)')
+    const collapseOnDesktop = () => {
+      if (!mq.matches) setExpanded(false)
+    }
+    collapseOnDesktop()
+    mq.addEventListener('change', collapseOnDesktop)
+    return () => mq.removeEventListener('change', collapseOnDesktop)
+  }, [])
+
+  useEffect(() => {
+    if (!expanded) return
+
+    const onKey = (e) => {
+      if (e.key === 'Escape') setExpanded(false)
+    }
+    document.addEventListener('keydown', onKey)
+
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prevOverflow
+    }
+  }, [expanded])
 
   const slide = REEL_SLIDES[active]
 
@@ -29,7 +57,7 @@ function home() {
         </div>
       </div>
 
-      <div className="hero-right">
+      <div className={`hero-right${expanded ? ' is-expanded' : ''}`}>
         <div className="reel" aria-live="polite" aria-atomic="true">
           {REEL_SLIDES.map((s, i) => (
             <div
@@ -38,6 +66,19 @@ function home() {
               aria-hidden={i !== active}
             />
           ))}
+          <button
+            type="button"
+            className="reel-expand"
+            aria-label={expanded ? 'Collapse project panel' : 'Expand project panel'}
+            aria-expanded={expanded}
+            onClick={() => setExpanded((v) => !v)}
+          >
+            {expanded ? (
+              <ArrowsIn size={18} weight="bold" aria-hidden="true" />
+            ) : (
+              <ArrowsOut size={18} weight="bold" aria-hidden="true" />
+            )}
+          </button>
         </div>
         <div className="reel-meta">
           <div className="reel-title">
