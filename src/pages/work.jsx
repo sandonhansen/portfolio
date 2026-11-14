@@ -44,9 +44,6 @@ function work() {
       <header className="work-head">
         <div className="work-head-copy">
           <h2 className="work-head-title">Selected work</h2>
-          <p className="work-head-desc">
-            Below is a small cross‑section of relevant work that I can share. I&apos;m happy to walk through my process and discuss these examples, get in touch to learn more.
-          </p>
         </div>
       </header>
 
