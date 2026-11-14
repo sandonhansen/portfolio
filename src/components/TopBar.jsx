@@ -1,6 +1,7 @@
-import { NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { ArrowUpRight, Check, CopySimple } from '@phosphor-icons/react'
+import { SandonIconRound } from './SandonIconRound'
 
 const LINKS = [
   { to: '/', end: true, label: 'Home' },
@@ -124,14 +125,18 @@ function TopBar() {
     try {
       return localStorage.getItem('theme')
         || document.documentElement.dataset.theme
-        || 'dark'
+        || 'light'
     } catch {
-      return 'dark'
+      return 'light'
     }
   })
   const navRef = useRef(null)
   const location = useLocation()
   const [connectOpen, setConnectOpen] = useState(false)
+  const [brandHot, setBrandHot] = useState(false)
+  const [brandPlay, setBrandPlay] = useState(0)
+  const brandHoverRef = useRef(false)
+  const brandLockRef = useRef(0)
   const [pill, setPill] = useState({ left: 0, width: 0, ready: false })
 
   useEffect(() => {
@@ -145,14 +150,24 @@ function TopBar() {
     const active =
       nav.querySelector('.connect-trigger.is-open') ||
       nav.querySelector('a.active')
-    if (!active) return
+    if (!active) {
+      setPill((p) => (p.ready ? { ...p, ready: false } : p))
+      return
+    }
 
     const navRect = nav.getBoundingClientRect()
     const activeRect = active.getBoundingClientRect()
+    const width = Math.round(activeRect.width)
+
+    // Hidden mobile Home link can still be .active with zero width.
+    if (width <= 0) {
+      setPill((p) => (p.ready ? { ...p, ready: false } : p))
+      return
+    }
 
     setPill({
       left: Math.round(activeRect.left - navRect.left),
-      width: Math.round(activeRect.width),
+      width,
       ready: true,
     })
   }
@@ -176,9 +191,47 @@ function TopBar() {
 
   const toggle = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
 
+  const setBrandActive = (next) => {
+    if (next) {
+      setBrandHot(true)
+      return
+    }
+    if (Date.now() < brandLockRef.current) return
+    setBrandHot(false)
+  }
+
+  const pulseBrandIcon = () => {
+    const until = Date.now() + 1300
+    brandLockRef.current = until
+    setBrandHot(true)
+    setBrandPlay((n) => n + 1)
+    window.setTimeout(() => {
+      if (brandLockRef.current !== until) return
+      brandLockRef.current = 0
+      if (!brandHoverRef.current) setBrandHot(false)
+    }, 1300)
+  }
+
   return (
     <div className="top">
-      <div className="brandtag"><b>Sandon Hansen</b><br />Product x Design</div>
+      <Link
+        className="brandtag"
+        to="/"
+        aria-label="Home"
+        onPointerEnter={() => {
+          brandHoverRef.current = true
+          setBrandActive(true)
+        }}
+        onPointerLeave={() => {
+          brandHoverRef.current = false
+          setBrandActive(false)
+        }}
+        onFocus={() => setBrandActive(true)}
+        onBlur={() => setBrandActive(false)}
+        onPointerDown={pulseBrandIcon}
+      >
+        <SandonIconRound size={52} active={brandHot} playToken={brandPlay} />
+      </Link>
       <div className="cluster">
         <nav ref={navRef} aria-label="Primary">
           <span
@@ -191,7 +244,18 @@ function TopBar() {
             }}
           />
           {LINKS.map(({ to, end, label }) => (
-            <NavLink key={to} to={to} end={end}>{label}</NavLink>
+            <NavLink
+              key={to}
+              to={to}
+              end={end}
+              className={({ isActive }) =>
+                [to === '/' ? 'nav-home' : null, isActive ? 'active' : null]
+                  .filter(Boolean)
+                  .join(' ')
+              }
+            >
+              {label}
+            </NavLink>
           ))}
           <ConnectMenu onOpenChange={setConnectOpen} />
         </nav>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,16 +7,16 @@
     <script>
       (function () {
         try {
-          var t = localStorage.getItem('theme') || 'dark'
+          var t = localStorage.getItem('theme') || 'light'
           document.documentElement.dataset.theme = t
         } catch (e) {
-          document.documentElement.dataset.theme = 'dark'
+          document.documentElement.dataset.theme = 'light'
         }
       })()
     </script>
     <style>
-      html, body { background: #13100a; }
-      html[data-theme="light"], html[data-theme="light"] body { background: #ebe4d2; }
+      html, body { background: #ebe4d2; }
+      html[data-theme="dark"], html[data-theme="dark"] body { background: #13100a; }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

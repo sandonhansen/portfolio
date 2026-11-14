@@ -1,0 +1,51 @@
+.sandon-icon :is(.sandon-icon__head, .sandon-icon__brow-left,
+  .sandon-icon__brow-right) {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* ---------- Head ----------
+   Anticipation dip -> stretch up into an overshooting tilt -> a little drift
+   -> swings back past centre and settles. */
+.sandon-icon .sandon-icon__head { transform-origin: 50% 100%; }
+.sandon-icon[data-active="true"] .sandon-icon__head {
+  animation: sandon-icon-tilt 1.2s ease-in-out both;
+}
+@keyframes sandon-icon-tilt {
+  0%   { transform: none; }
+  10%  { transform: rotate(-4deg) translateY(4px) scale(1.03, 0.96); }
+  30%  { transform: rotate(12deg) translateY(-14px) scale(0.97, 1.04); }
+  42%  { transform: rotate(8deg) translateY(-8px) scale(1, 1); }
+  60%  { transform: rotate(9.5deg) translateY(-10px) scale(1, 1); }
+  76%  { transform: rotate(-4deg) translateY(2px) scale(1.02, 0.98); }
+  88%  { transform: rotate(1.5deg) translateY(0) scale(1, 1); }
+  100% { transform: none; }
+}
+
+/* ---------- Glance right ----------
+   Eyes travel furthest, brows and mouth a little less, so the face reads as
+   turning slightly. Holds while hovered and eases back after. */
+.sandon-icon :is(.sandon-icon__eyes, .sandon-icon__brows, .sandon-icon__mouth) {
+  transition: transform 420ms cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+.sandon-icon[data-active="true"] .sandon-icon__eyes  { transform: translateX(26px); transition-delay: 80ms; }
+.sandon-icon[data-active="true"] .sandon-icon__brows { transform: translateX(16px); transition-delay: 80ms; }
+.sandon-icon[data-active="true"] .sandon-icon__mouth { transform: translateX(10px); transition-delay: 80ms; }
+
+/* ---------- Double brow raise ----------
+   Both brows bounce up twice ("eyebrows wiggle"), then settle. */
+.sandon-icon[data-active="true"] :is(.sandon-icon__brow-left, .sandon-icon__brow-right) {
+  animation: sandon-icon-brow-raise 900ms ease-in-out 120ms both;
+}
+@keyframes sandon-icon-brow-raise {
+  0%   { transform: none; }
+  16%  { transform: translateY(-24px); }
+  32%  { transform: translateY(-4px); }
+  48%  { transform: translateY(-24px); }
+  70%  { transform: translateY(-2px); }
+  100% { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sandon-icon * { transition: none !important; animation: none !important; }
+}
