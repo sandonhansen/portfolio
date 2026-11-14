@@ -392,24 +392,14 @@ nav > a.active,
     gap: 10px;
   }
   .cluster {
-    flex: 1 1 auto;
     width: auto;
     min-width: 0;
-    margin-left: 0;
+    margin-left: auto;
     justify-content: flex-end;
     gap: 8px;
-  }
-  nav {
-    flex: 1 1 auto;
-    min-width: 0;
   }
   /* Icon already links home on mobile. */
   nav > a.nav-home {
     display: none;
-  }
-  nav > a,
-  .connect-trigger {
-    flex: 1 1 0;
-    padding: 0 12px;
   }
 }
