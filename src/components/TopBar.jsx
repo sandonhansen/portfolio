@@ -1,7 +1,6 @@
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { ArrowUpRight, Check, CopySimple } from '@phosphor-icons/react'
-import { SandonIconRound } from './SandonIconRound'
 
 const LINKS = [
   { to: '/', end: true, label: 'Home' },
@@ -133,10 +132,6 @@ function TopBar() {
   const navRef = useRef(null)
   const location = useLocation()
   const [connectOpen, setConnectOpen] = useState(false)
-  const [brandHot, setBrandHot] = useState(false)
-  const [brandPlay, setBrandPlay] = useState(0)
-  const brandHoverRef = useRef(false)
-  const brandLockRef = useRef(0)
   const [pill, setPill] = useState({ left: 0, width: 0, ready: false })
 
   useEffect(() => {
@@ -181,50 +176,8 @@ function TopBar() {
 
   const toggle = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
 
-  const setBrandActive = (next) => {
-    if (next) {
-      setBrandHot(true)
-      return
-    }
-    if (Date.now() < brandLockRef.current) return
-    setBrandHot(false)
-  }
-
-  const pulseBrandIcon = () => {
-    const until = Date.now() + 1300
-    brandLockRef.current = until
-    setBrandHot(true)
-    setBrandPlay((n) => n + 1)
-    window.setTimeout(() => {
-      if (brandLockRef.current !== until) return
-      brandLockRef.current = 0
-      if (!brandHoverRef.current) setBrandHot(false)
-    }, 1300)
-  }
-
   return (
     <div className="top">
-      <Link
-        className="brandtag"
-        to="/"
-        aria-label="Home"
-        onPointerEnter={() => {
-          brandHoverRef.current = true
-          setBrandActive(true)
-        }}
-        onPointerLeave={() => {
-          brandHoverRef.current = false
-          setBrandActive(false)
-        }}
-        onFocus={() => setBrandActive(true)}
-        onBlur={() => setBrandActive(false)}
-        onPointerDown={pulseBrandIcon}
-      >
-        <SandonIconRound size={52} active={brandHot} playToken={brandPlay} />
-        <span>
-          <b>Sandon Hansen</b><br />Product x Design
-        </span>
-      </Link>
       <div className="cluster">
         <nav ref={navRef} aria-label="Primary">
           <span
