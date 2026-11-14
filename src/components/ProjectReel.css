@@ -17,7 +17,7 @@
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--muted) 10%, var(--panel));
+  background: #000;
 }
 .project-reel-stage .slide {
   position: absolute;
@@ -27,15 +27,10 @@
   pointer-events: none;
 }
 .project-reel-stage .slide.is-active { opacity: 1; }
-.project-reel-stage .s1 { background: #e4e0d2; }
+.project-reel-stage .s1 { background: #15160e; }
 .project-reel-stage .s2 { background: var(--lime); }
-.project-reel-stage .s3 { background: #d5dfc4; }
+.project-reel-stage .s3 { background: #1c2417; }
 .project-reel-stage .s4 { background: #eceadf; }
-[data-theme="dark"] .project-reel-stage {
-  background: #000;
-}
-[data-theme="dark"] .project-reel-stage .s1 { background: #15160e; }
-[data-theme="dark"] .project-reel-stage .s3 { background: #1c2417; }
 
 .reel-hit {
   position: absolute;
