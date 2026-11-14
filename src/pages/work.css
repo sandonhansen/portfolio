@@ -25,15 +25,6 @@
   color: var(--ink);
   margin: 0;
 }
-.work .work-head-desc {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: clamp(1.02rem, 1.35vw, 1.18rem);
-  line-height: 1.62;
-  color: var(--muted);
-  margin: 16px 0 0;
-}
-
 /* Project gallery */
 .work .project-list {
   display: flex;
@@ -58,12 +49,15 @@
   width: 100%;
   aspect-ratio: 32 / 15;
   border-radius: 22px;
-  background: #1c2417;
+  background: color-mix(in srgb, var(--muted) 14%, var(--panel));
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: clamp(20px, 4vw, 48px);
+}
+[data-theme="dark"] .work .work-card-preview {
+  background: #1c2417;
 }
 
 .work .work-card-preview img {
