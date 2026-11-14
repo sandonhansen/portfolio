@@ -50,12 +50,15 @@
   width: 100%;
   aspect-ratio: 32 / 15;
   border-radius: 22px;
-  background: #1c2417;
+  background: #eceadf;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: clamp(20px, 4vw, 48px);
+}
+[data-theme="dark"] .work .work-card-preview {
+  background: #1c2417;
 }
 
 .work .work-card-preview img {
