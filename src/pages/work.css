@@ -73,13 +73,35 @@
   object-fit: contain;
 }
 
+.work .work-card-meta {
+  margin-top: 16px;
+}
+
+.work .work-card-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.work .work-card-title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--lime);
+  margin: 6px 0 0;
+}
+
 .work .work-card-writeup {
   font-family: var(--display);
   font-weight: 400;
   font-size: clamp(1rem, 1.5vw, 1.2rem);
   line-height: 1.5;
   color: var(--muted);
-  margin: 18px 0 0;
+  margin: 14px 0 0;
   max-width: 62ch;
 }
 
