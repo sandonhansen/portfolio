@@ -25,14 +25,6 @@
   color: var(--ink);
   margin: 0;
 }
-.work .work-head-desc {
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: clamp(1.02rem, 1.35vw, 1.18rem);
-  line-height: 1.62;
-  color: var(--muted);
-  margin: 16px 0 0;
-}
 
 /* Project gallery */
 .work .project-list {
