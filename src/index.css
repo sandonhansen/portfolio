@@ -397,6 +397,10 @@ nav > a.active,
     flex: 1 1 auto;
     min-width: 0;
   }
+  /* Icon already links home on mobile. */
+  nav > a.nav-home {
+    display: none;
+  }
   nav > a,
   .connect-trigger {
     flex: 1 1 0;

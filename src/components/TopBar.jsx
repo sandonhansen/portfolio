@@ -150,14 +150,24 @@ function TopBar() {
     const active =
       nav.querySelector('.connect-trigger.is-open') ||
       nav.querySelector('a.active')
-    if (!active) return
+    if (!active) {
+      setPill((p) => (p.ready ? { ...p, ready: false } : p))
+      return
+    }
 
     const navRect = nav.getBoundingClientRect()
     const activeRect = active.getBoundingClientRect()
+    const width = Math.round(activeRect.width)
+
+    // Hidden mobile Home link can still be .active with zero width.
+    if (width <= 0) {
+      setPill((p) => (p.ready ? { ...p, ready: false } : p))
+      return
+    }
 
     setPill({
       left: Math.round(activeRect.left - navRect.left),
-      width: Math.round(activeRect.width),
+      width,
       ready: true,
     })
   }
@@ -234,7 +244,18 @@ function TopBar() {
             }}
           />
           {LINKS.map(({ to, end, label }) => (
-            <NavLink key={to} to={to} end={end}>{label}</NavLink>
+            <NavLink
+              key={to}
+              to={to}
+              end={end}
+              className={({ isActive }) =>
+                [to === '/' ? 'nav-home' : null, isActive ? 'active' : null]
+                  .filter(Boolean)
+                  .join(' ')
+              }
+            >
+              {label}
+            </NavLink>
           ))}
           <ConnectMenu onOpenChange={setConnectOpen} />
         </nav>
