@@ -69,6 +69,17 @@ body {
   gap: 16px;
   flex-wrap: wrap;
 }
+.brandtag {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  color: var(--ink);
+}
+.brandtag .sandon-icon {
+  flex: none;
+  color: var(--ink);
+}
 .cluster {
   display: flex;
   align-items: center;
