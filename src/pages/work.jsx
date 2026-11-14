@@ -31,6 +31,10 @@ function ProjectCard({ study }) {
           <img src={study.preview} alt="" />
         ) : null}
       </div>
+      <div className="work-card-meta">
+        <div className="work-card-eyebrow">{study.eyebrow}</div>
+        <h3 className="work-card-title">{study.title}</h3>
+      </div>
       <p className="work-card-writeup">{study.hook}</p>
     </article>
   )
