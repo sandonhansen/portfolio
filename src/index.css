@@ -70,33 +70,15 @@ body {
   flex-wrap: wrap;
 }
 .brandtag {
-  font-family: var(--mono);
-  font-size: 16px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  line-height: 1.5;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  flex: none;
+  color: var(--ink);
 }
 .brandtag .sandon-icon {
   flex: none;
   color: var(--ink);
-}
-.brandtag > span {
-  font-size: 14px;
-}
-.brandtag b {
-  font-size: 16px;
-  color: var(--ink);
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-.brandtag:hover b,
-.brandtag:focus-visible b {
-  color: var(--lime);
 }
 .cluster {
   display: flex;
@@ -405,20 +387,19 @@ nav > a.active,
     padding-top: 18px;
   }
   .name { font-size: clamp(3.2rem, 18vw, 6rem); }
-  .brandtag { flex: 1 0 100%; }
-  .cluster {
-    width: 100%;
-    margin-left: 0;
-    justify-content: flex-end;
+  .top {
+    flex-wrap: nowrap;
     gap: 10px;
   }
-  nav {
-    flex: 1 1 auto;
+  .cluster {
+    width: auto;
     min-width: 0;
+    margin-left: auto;
+    justify-content: flex-end;
+    gap: 8px;
   }
-  nav > a,
-  .connect-trigger {
-    flex: 1 1 0;
-    padding: 0 12px;
+  /* Icon already links home on mobile. */
+  nav > a.nav-home {
+    display: none;
   }
 }
